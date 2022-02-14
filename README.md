@@ -1,68 +1,83 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Testing config
 
-## Available Scripts
+## Testing tools we weill use
 
-In the project directory, you can run:
+- [Enzyme REact 16](https://enzymejs.github.io/enzyme/)
+- [Enzyme React 17](https://github.com/wojtekmaj/enzyme-adapter-react-17)
+- [Enzyme to JSON](https://www.npmjs.com/package/enzyme-to-json)
+- [React Hook Testing Library](https://react-hooks-testing-library.com)
 
-### `yarn start`
+ ## Steps to do testing config with this dependencies, **"react": "^16.13.1"**
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### 1. Install Enzyme, Enzyme to JSON and React.Hooks Testing Library.
 
-### `yarn test`
+- ``` npm i --save-dev enzyme enzyme-adapter-react-16 ```
+- ``` npm install --save-dev enzyme-to-json ```
+- ``` npm install --save-dev @testing-library/react-hooks ```
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Now we have the next Development dependencies installed:
+```js
+"devDependencies": {
+    "@testing-library/react-hooks": "^7.0.2",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
+    "enzyme-to-json": "^3.6.2"
+  }
+```
 
-### `yarn build`
+### 2. Config process
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Inside **SRC folder**, create a file call **setupTests.js**
+- Write the next fragments:
+    - from Enzyme:
+      ```js
+      import Enzyme from 'enzyme';
+      import Adapter from 'enzyme-adapter-react-16';
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+      Enzyme.configure({ adapter: new Adapter() });
+      ```
+    - from Enzyme to JSON:
+      ```js
+      import {createSerializer} from 'enzyme-to-json';
+      expect.addSnapshotSerializer(createSerializer({mode: 'deep'}));
+      ```
+- Final order is:
+  ```js
+  import Enzyme from 'enzyme';
+  import Adapter from 'enzyme-adapter-react-16';
+  import {createSerializer} from 'enzyme-to-json';
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+  Enzyme.configure({ adapter: new Adapter() });
+  expect.addSnapshotSerializer(createSerializer({mode: 'deep'}));
+  ```
+And we are ready to start our tests ✅
 
-### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+ ## Steps to do testing config with this dependencies, **"react": "^17"**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+You have to install a different adapter:
+- ``` npm install --save-dev @wojtekmaj/enzyme-adapter-react-17 ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+and the fragment code you will write the **setupTests.js**:
 
-## Learn More
+```js
+import Enzyme from 'enzyme';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Enzyme.configure({ adapter: new Adapter() });
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The final config code result is:
+```js
+import Enzyme from 'enzyme';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
+import {createSerializer} from 'enzyme-to-json';
 
-### Code Splitting
+Enzyme.configure({ adapter: new Adapter() });
+expect.addSnapshotSerializer(createSerializer({mode: 'deep'}));
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+## CustomHook Tests
 
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify

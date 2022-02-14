@@ -3,7 +3,7 @@ import React from 'react'
 export const HookApp = () => {
     return (
         <div>
-            <h1>Hola Mundo</h1>
+            <h1>Hello Sexy</h1>
         </div>
     )
 }

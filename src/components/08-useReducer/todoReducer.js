@@ -1,5 +1,3 @@
-
-
 export const todoReducer = ( state = [], action ) => {
 
     switch ( action.type ) {
@@ -8,15 +6,12 @@ export const todoReducer = ( state = [], action ) => {
 
         case 'delete':
             return state.filter( todo => todo.id !== action.payload ); // 123123123
-
-
         case 'toggle': 
             return state.map( todo => 
                 ( todo.id === action.payload )
                     ? { ...todo, done: !todo.done }
                     : todo
             );
-
         case 'toggle-old':
             return state.map( todo => {
 
@@ -28,12 +23,9 @@ export const todoReducer = ( state = [], action ) => {
                 } else {
                     return todo;
                 }
-
             })
 
         default:
             return state;
     }
-
-
-}
+};

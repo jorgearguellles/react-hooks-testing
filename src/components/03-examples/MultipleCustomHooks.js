@@ -11,13 +11,10 @@ export const MultipleCustomHooks = () => {
     
     const { author, quote } = !!data && data[0];
 
-
     return (
         <div>
             <h1>BreakingBad Quotes</h1>
             <hr />
-
-
             {
                 loading 
                 ?
@@ -35,14 +32,12 @@ export const MultipleCustomHooks = () => {
                     )
             }
 
-
             <button 
                 className="btn btn-primary"
                 onClick={ increment }
             >
-                Siguiente quote
+                Next quote
             </button>
-
         </div>
     )
 }
