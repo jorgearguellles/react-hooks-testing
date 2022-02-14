@@ -2,7 +2,6 @@ import React from 'react';
 
 export const TodoListItem = ({ todo, index, handleDelete, handleToggle }) => {
 
-
     return (
         <li
             key={ todo.id }
@@ -18,7 +17,7 @@ export const TodoListItem = ({ todo, index, handleDelete, handleToggle }) => {
                 className="btn btn-danger"
                 onClick={ () => handleDelete( todo.id ) }
             >
-                Borrar
+                Delete
             </button>
         </li>
     )
